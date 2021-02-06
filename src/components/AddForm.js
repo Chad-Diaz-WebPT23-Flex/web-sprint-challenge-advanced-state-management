@@ -27,7 +27,7 @@ class AddForm extends React.Component {
     // console.log("handleClick from AddForm.js");
     e.preventDefault();
     this.props.addSmurf(this.state);
-    this.props.fetchSmurfs();
+    
     
   };
 
@@ -39,16 +39,32 @@ class AddForm extends React.Component {
           <div className="form-group">
             <label htmlFor="name">New Smurf Name:</label>
             <br />
-            <input onChange={this.handleChange} name="name" id="name" />
+            <input
+              value={this.state.name}
+              onChange={this.handleChange}
+              name="name"
+              id="name"
+            />
             <label htmlFor="nickname">Nick Name:</label>
             <br />
-            <input onChange={this.handleChange} name="nickname" id="nickname" />
+            <input
+              value={this.state.nickname}
+              onChange={this.handleChange}
+              name="nickname"
+              id="nickname"
+            />
             <label htmlFor="position">Position:</label>
             <br />
-            <input onChange={this.handleChange} name="position" id="position" />
+            <input
+              value={this.state.position}
+              onChange={this.handleChange}
+              name="position"
+              id="position"
+            />
             <label htmlFor="description">Description:</label>
             <br />
             <input
+              value={this.state.description}
               onChange={this.handleChange}
               name="description"
               id="description"

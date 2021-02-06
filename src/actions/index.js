@@ -20,11 +20,11 @@ export const fetchSmurfs = () => (dispatch) => {
         // console.log("error from axios get request", err);
         dispatch({ type: DATA_ERROR, payload: err.message });
       });
-  }, 1500);
+  }, 1000);
 };
 
 export const addSmurf = (newSmurf) => (dispatch) => {
-  console.log('action fired for the addSmurf action creator')
+  console.log("action fired for the addSmurf action creator");
   axios
     .post(apiURL, newSmurf)
     .then((res) => {
@@ -32,7 +32,7 @@ export const addSmurf = (newSmurf) => (dispatch) => {
       dispatch({ type: ADD_DATA, payload: res });
     })
     .catch((err) => {
-      console.log("error from api POST request: ",err)
+      console.log("error from api POST request: ", err);
       dispatch({ type: DATA_ERROR, payload: err.message });
     });
 };

@@ -3,6 +3,10 @@ html, body, #root, .App {
   background: #007bff!important;
 }
 
+.App h2 {
+  text-align: center;
+}
+
 main {
   background: white;
   width: 65%;
@@ -26,8 +30,8 @@ section {
 }
 
 .card {
-  /* height: 100%;
-  min-width:250px; */
+  height: 100%;
+  min-width:250px;
   flex: 0 1 24%;
 }
 
@@ -36,6 +40,37 @@ section {
   padding:0;
 }
 
+.smurfCardWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(auto-fill, auto);
+  column-gap: 2%;
+  row-gap: 3.6%;
+  padding: 0 5%;
+  height: 100%;
+}
+
+.smurfCard {
+  /* padding: 0.5rem 1rem; */
+  text-align: center;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.smurfCard header {
+  background-color: #1a4068;
+  color: #f2f2f2;
+  width: 100%;
+  padding: 0.4rem 0 0 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.smurfCard > p {
+  padding: 1rem 1rem;
+}
 
 
 @media (max-width: 800px) {

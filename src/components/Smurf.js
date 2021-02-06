@@ -1,11 +1,26 @@
 import React from 'react';
 
 class Smurf extends React.Component {
+    
     render() {
         const { smurf } = this.props;
 
-        return(<div data-testid="smurf" className="card">
-        </div>);
+        return (
+            <div data-testid="smurf" className="smurfCard">
+                <header>
+                    <h2 className="card-title">{smurf.name}</h2>
+                    <p>
+                        My Nick Name Is {smurf.nickname}
+                    </p>
+                    <p>
+                        I am a {smurf.position}
+                    </p>
+                    <p>
+                    {smurf.description}
+                    </p>
+                </header>
+            </div>
+        );
     }
 }
 

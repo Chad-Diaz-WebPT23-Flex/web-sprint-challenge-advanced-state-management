@@ -1,29 +1,27 @@
 import React from "react";
-import { Prev } from "react-bootstrap/esm/PageItem";
+// import { Prev } from "react-bootstrap/esm/PageItem";
 import { connect } from "react-redux";
-import { fetchSmurfs } from "../actions";
+import Smurf from "./Smurf";
 
 export class SmurfDisplay extends React.Component {
-
-  componentDidMount() {
-    this.props.fetchSmurfs();
-  }
-
-
   render() {
-    return <div></div>;
+    return (
+      <div className="smurfCardWrapper">
+        {this.props.smurfs.map((smurf) => (
+          <Smurf key={smurf.id} smurf={smurf} />
+        ))}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     smurfs: state.smurfs,
-    isLoading: state.isLoading,
-    error: state.error,
   };
 };
 
-export default connect(mapStateToProps, { fetchSmurfs })(SmurfDisplay);
+export default connect(mapStateToProps, {})(SmurfDisplay);
 
 //Task List:
 //1. Import in all needed components and library methods.
