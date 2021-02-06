@@ -6,29 +6,56 @@ class AddForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      nickname: "",
-      position: "",
-      description: "",
+      newSmurf: [
+        {
+          name: "",
+          nickname: "",
+          position: "",
+          description: "",
+          error: "",
+        },
+      ],
     };
   }
 
   // componentDidUpdate(prevState, prevProps) {
-  //   if (prevState.smurfs !== this.state.smurfs) {
+  //   if (prevState.smurfs !== this.state.newSmurf) {
   //      this.props.fetchSmurfs();
   //   }
   // }
 
   handleChange = (e) => {
-    this.setState({ ...this.state, [e.target.name]: e.target.value });
+    this.setState({
+      newSmurf: { ...this.state.newSmurf, [e.target.name]: e.target.value },
+    });
   };
 
   handleClick = (e) => {
     // console.log("handleClick from AddForm.js");
     e.preventDefault();
-    this.props.addSmurf(this.state);
-    
-    
+    if (!this.state.newSmurf.name) {
+      this.setState({ ...this.state.newSmurf, error: "Must have a Name" });
+    } else if (!this.state.newSmurf.nickname) {
+      this.setState({ ...this.state.newSmurf, error: "Must have a Nick Name" });
+    } else if (!this.state.newSmurf.position) {
+      this.setState({
+        ...this.state.newSmurf,
+        error: "Please Give a Position",
+      });
+    } else if (!this.state.newSmurf.description) {
+      this.setState({
+        ...this.state.newSmurf,
+        error: "Please Give a Description",
+      });
+    } else {
+      this.props.addSmurf(this.state.newSmurf);
+      this.setState({
+        name: "",
+        nickname: "",
+        position: "",
+        description: "",
+      });
+    }
   };
 
   render() {
@@ -40,7 +67,7 @@ class AddForm extends React.Component {
             <label htmlFor="name">New Smurf Name:</label>
             <br />
             <input
-              value={this.state.name}
+              value={this.state.newSmurf.name}
               onChange={this.handleChange}
               name="name"
               id="name"
@@ -48,7 +75,7 @@ class AddForm extends React.Component {
             <label htmlFor="nickname">Nick Name:</label>
             <br />
             <input
-              value={this.state.nickname}
+              value={this.state.newSmurf.nickname}
               onChange={this.handleChange}
               name="nickname"
               id="nickname"
@@ -56,7 +83,7 @@ class AddForm extends React.Component {
             <label htmlFor="position">Position:</label>
             <br />
             <input
-              value={this.state.position}
+              value={this.state.newSmurf.position}
               onChange={this.handleChange}
               name="position"
               id="position"
@@ -64,20 +91,25 @@ class AddForm extends React.Component {
             <label htmlFor="description">Description:</label>
             <br />
             <input
-              value={this.state.description}
+              value={this.state.newSmurf.description}
               onChange={this.handleChange}
               name="description"
               id="description"
             />
           </div>
 
-          <div
-            data-testid="errorAlert"
-            className="alert alert-danger"
-            role="alert"
-          >
-            Error:{" "}
-          </div>
+          {this.state.error ? (
+            <div
+              data-testid="errorAlert"
+              className="alert alert-danger"
+              role="alert"
+            >
+              Error:{this.state.error}
+            </div>
+          ) : (
+            <></>
+          )}
+
           <button type="submit">Submit Smurf</button>
         </form>
       </section>
@@ -85,7 +117,14 @@ class AddForm extends React.Component {
   }
 }
 
-export default connect(null, { addSmurf, fetchSmurfs })(AddForm);
+const mapStateToProps = (state) => {
+  return {
+    smurfs: state.smurfs,
+    error: state.error,
+  };
+};
+
+export default connect(mapStateToProps, { addSmurf, fetchSmurfs })(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.

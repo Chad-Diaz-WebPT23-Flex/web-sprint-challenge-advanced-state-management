@@ -10,8 +10,13 @@ import "./App.css";
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchSmurfs();
+    if (this.props.smurfs.length <= 0) {
+      this.props.fetchSmurfs();
+    }
+    
   }
+
+
 
   render() {
     return (
@@ -22,9 +27,18 @@ class App extends Component {
         <main>
           <AddForm />
           {this.props.isLoading ? (
-            <Loader style={{textAlign: 'center'}} type="Circles" color="#00BFFF" height={80} width={80} />
+            <Loader
+              style={{ textAlign: "center" }}
+              type="Circles"
+              color="#00BFFF"
+              height={80}
+              width={80}
+            />
           ) : this.props.error ? (
-            <div style={{ color: "red" }}>Received this error trying to get Smurfs: <strong>{this.props.error}</strong></div>
+            <div style={{ color: "red" }}>
+              Received this error trying to get Smurfs:{" "}
+              <strong>{this.props.error}</strong>
+            </div>
           ) : (
             <h2>Here are the SMURFS!</h2>
           )}
@@ -37,6 +51,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    smurfs: state.smurfs,
     error: state.error,
     isLoading: state.isLoading,
   };
