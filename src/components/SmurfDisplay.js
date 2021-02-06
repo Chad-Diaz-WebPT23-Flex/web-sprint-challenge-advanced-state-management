@@ -1,10 +1,16 @@
 import React from 'react';
+import { Prev } from 'react-bootstrap/esm/PageItem';
 import { connect } from 'react-redux';
 import { fetchSmurfs } from '../actions';
 
 export class SmurfDisplay extends React.Component {
     componentDidMount() {
         this.props.fetchSmurfs();
+    }
+    componentDidUpdate(prevState, prevProps) {
+        if (prevState.smurfs !== this.state.smurfs) {
+            this.props.fetchSmurfs(this.props.smurfs);
+        }
     }
     render() {
         return (

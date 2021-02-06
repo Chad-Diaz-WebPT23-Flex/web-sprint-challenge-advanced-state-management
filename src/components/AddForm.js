@@ -1,75 +1,67 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { addSmurf } from '../actions';
+import React from "react";
+import { connect } from "react-redux";
+import { addSmurf } from "../actions";
 
 class AddForm extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      nickname: "",
+      position: "",
+      description: "",
+    };
+  }
 
-    constructor() {
-        super();
-        this.state = {
-            name: '',
-            nickName: '',
-            position: '',
-            description: '',
-        }
-    }
+  handleChange = (e) => {
+    this.setState({ ...this.state, [e.target.name]: e.target.value });
+  };
 
-    handleChange = (e) => {
-        this.setState({ ...this.state, [e.target.name]: e.target.value})
-    }
+  handleClick = (e) => {
+    // console.log("handleClick from AddForm.js");
+    e.preventDefault();
+    this.props.addSmurf(this.state);
+  };
 
-    handleClick = (e) => {
-        e.preventDefault();
-        this.props.addSmurf(this.state)
-    }
+  render() {
+    return (
+      <section>
+        <h2>Add New Smurf</h2>
+        <form onSubmit={this.handleClick}>
+          <div className="form-group">
+            <label htmlFor="name">New Smurf Name:</label>
+            <br />
+            <input onChange={this.handleChange} name="name" id="name" />
+            <label htmlFor="nickname">Nick Name:</label>
+            <br />
+            <input onChange={this.handleChange} name="nickname" id="nickname" />
+            <label htmlFor="position">Position:</label>
+            <br />
+            <input onChange={this.handleChange} name="position" id="position" />
+            <label htmlFor="description">Description:</label>
+            <br />
+            <input
+              onChange={this.handleChange}
+              name="description"
+              id="description"
+            />
+          </div>
 
-    render() {
-        return (
-          <section>
-            <h2>Add New Smurf</h2>
-            <form>
-              <div className="form-group">
-                <label htmlFor="name">New Smurf Name:</label>
-                <br />
-                <input onChange={this.handleChange} name="name" id="name" />
-                <label htmlFor="nickName">Nick Name:</label>
-                <br />
-                <input
-                  onChange={this.handleChange}
-                  name="nickName"
-                  id="nickName"
-                />
-                <label htmlFor="position">Position:</label>
-                <br />
-                <input
-                  onChange={this.handleChange}
-                  name="position"
-                  id="position"
-                />
-                <label htmlFor="description">Description:</label>
-                <br />
-                <input
-                  onChange={this.handleChange}
-                  name="description"
-                  id="description"
-                />
-              </div>
-
-              <div
-                data-testid="errorAlert"
-                className="alert alert-danger"
-                role="alert"
-              >
-                Error:{" "}
-              </div>
-              <button onSubmit={this.handleClick}>Submit Smurf</button>
-            </form>
-          </section>
-        );
-    }
+          <div
+            data-testid="errorAlert"
+            className="alert alert-danger"
+            role="alert"
+          >
+            Error:{" "}
+          </div>
+          <button type="submit">Submit Smurf</button>
+        </form>
+      </section>
+    );
+  }
 }
 
-export default connect(null, {addSmurf})(AddForm);
+export default connect(null, { addSmurf })(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.
