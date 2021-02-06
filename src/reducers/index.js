@@ -50,7 +50,7 @@ export default reducer;
 //      - an array of smurfs
 //      - a boolean indicating if the app is loading
 //      - error text
-//2. Setup your reducer to take the state and action as peremeters
+//2. Setup your reducer to take the state and action as parameters
 //3. Add in cases to your reducer to handle:
 //      - The start of an api call
 //      - The end of an api call

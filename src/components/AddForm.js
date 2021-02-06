@@ -1,24 +1,75 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addSmurf } from '../actions';
 
 class AddForm extends React.Component {
 
-    render() {
-        return(<section>
-            <h2>Add Smurf</h2>
-            <form>
-                <div className="form-group">
-                    <label htmlFor="name">Name:</label><br/>
-                    <input onChange={this.handleChange} name="name" id="name" />
-                </div>
+    constructor() {
+        super();
+        this.state = {
+            name: '',
+            nickName: '',
+            position: '',
+            description: '',
+        }
+    }
 
-                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
-                <button>Submit Smurf</button>
+    handleChange = (e) => {
+        this.setState({ ...this.state, [e.target.name]: e.target.value})
+    }
+
+    handleClick = (e) => {
+        e.preventDefault();
+        this.props.addSmurf(this.state)
+    }
+
+    render() {
+        return (
+          <section>
+            <h2>Add New Smurf</h2>
+            <form>
+              <div className="form-group">
+                <label htmlFor="name">New Smurf Name:</label>
+                <br />
+                <input onChange={this.handleChange} name="name" id="name" />
+                <label htmlFor="nickName">Nick Name:</label>
+                <br />
+                <input
+                  onChange={this.handleChange}
+                  name="nickName"
+                  id="nickName"
+                />
+                <label htmlFor="position">Position:</label>
+                <br />
+                <input
+                  onChange={this.handleChange}
+                  name="position"
+                  id="position"
+                />
+                <label htmlFor="description">Description:</label>
+                <br />
+                <input
+                  onChange={this.handleChange}
+                  name="description"
+                  id="description"
+                />
+              </div>
+
+              <div
+                data-testid="errorAlert"
+                className="alert alert-danger"
+                role="alert"
+              >
+                Error:{" "}
+              </div>
+              <button onSubmit={this.handleClick}>Submit Smurf</button>
             </form>
-        </section>);
+          </section>
+        );
     }
 }
 
-export default AddForm;
+export default connect(null, {addSmurf})(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.
@@ -28,9 +79,9 @@ export default AddForm;
 //      - an array of smurfs
 //      - a boolean indicating if the app is loading
 //      - error text
-//      - MAKE SURE TO CORRECTLY CONNECT LABELS TO YOUR FORM INPUTS. USE THE PATERN OF SHOWN FOR NAME.
+//      - MAKE SURE TO CORRECTLY CONNECT LABELS TO YOUR FORM INPUTS. USE THE PATTERN OF SHOWN FOR NAME.
 //5. Build eventhandler and listener needed to change the state.
-//6. Build eventhandler and listener needed to submit a new smurf and dispatch it's assosated action.
+//6. Build eventhandler and listener needed to submit a new smurf and dispatch it's associated action.
 //7. Ensure that the included alert code only displays when error text is passed in from redux.
 //4. DO NOT DELETE THE data-testid FIELD FROM THE ERROR ALERT! This is used for sprint grading.
 //8. Style as necessary.

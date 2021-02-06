@@ -13,14 +13,26 @@ export const fetchSmurfs = () => (dispatch) => {
     axios
       .get(apiURL)
       .then((res) => {
-        console.log("res from axios get request", res);
+        // console.log("res from axios get request", res);
         dispatch({ type: DATA_LOADED, payload: res.data });
       })
       .catch((err) => {
-        console.log("error from axios get request", err);
+        // console.log("error from axios get request", err);
         dispatch({ type: DATA_ERROR, payload: err.message });
       });
   }, 1500);
+};
+
+export const addSmurf = (newSmurf) => (dispatch) => {
+  axios
+    .post(apiURL, newSmurf)
+    .then((res) => {
+      console.log("axios POST request response: ", res);
+      dispatch({ type: ADD_DATA, payload: res });
+    })
+      .catch((err) => {
+        dispatch({type: DATA_ERROR, payload: err.message})
+    });
 };
 
 //Task List:
@@ -29,7 +41,7 @@ export const fetchSmurfs = () => (dispatch) => {
 //              - dispatch actions that indicate if we are waiting for a server response
 //              - dispatch an error text action if an error is returned from the server
 //2. Add add smurf action:
-//              - dispatch an error text action if smurf data does not includes a name, nickname and position field
+//              - dispatch an error text action if smurf data does not includes a name,nickname and position field
 //              - send a post request with the smurf as body to see if there is an error
 //              - dispatch add smurf action if request is successful
 //              - dispatch an error text action if an request returns an error
