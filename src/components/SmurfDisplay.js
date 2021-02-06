@@ -1,33 +1,27 @@
-import React from 'react';
-import { Prev } from 'react-bootstrap/esm/PageItem';
-import { connect } from 'react-redux';
-import { fetchSmurfs } from '../actions';
+import React from "react";
+import { Prev } from "react-bootstrap/esm/PageItem";
+import { connect } from "react-redux";
+import { fetchSmurfs } from "../actions";
 
 export class SmurfDisplay extends React.Component {
-    componentDidMount() {
-        this.props.fetchSmurfs();
-    }
-    componentDidUpdate(prevState, prevProps) {
-        if (prevState.smurfs !== this.state.smurfs) {
-            this.props.fetchSmurfs(this.props.smurfs);
-        }
-    }
-    render() {
-        return (
-        <div>
-            
-        </div>
-        )
-    };
-};
+
+  componentDidMount() {
+    this.props.fetchSmurfs();
+  }
+
+
+  render() {
+    return <div></div>;
+  }
+}
 
 const mapStateToProps = (state) => {
-    return {
-        smurfs: state.smurfs,
-        isLoading: state.isLoading,
-        error: state.error,
-    }
-}
+  return {
+    smurfs: state.smurfs,
+    isLoading: state.isLoading,
+    error: state.error,
+  };
+};
 
 export default connect(mapStateToProps, { fetchSmurfs })(SmurfDisplay);
 
