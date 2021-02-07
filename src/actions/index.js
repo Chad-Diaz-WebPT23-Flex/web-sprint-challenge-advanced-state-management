@@ -28,8 +28,8 @@ export const addSmurf = (newSmurf) => (dispatch) => {
   axios
     .post(apiURL, newSmurf)
     .then((res) => {
-      // console.log("axios POST request response: ", res);
-      dispatch({ type: ADD_DATA, payload: res });
+      console.log("axios POST request response: ", res);
+      dispatch({ type: ADD_DATA, payload: res.data });
     })
     .catch((err) => {
       console.log("error from api POST request: ", err);
