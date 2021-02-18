@@ -8,34 +8,34 @@ export const initialState = {
 
  const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOADING_DATA: {
+        case LOADING_DATA: 
             return {
                 ...state,
                 isLoading: true,
             }
-        }
-        case DATA_LOADED: {
+        
+        case DATA_LOADED: 
             return {
                 ...state,
                 isLoading: false,
                 error: '',
                 smurfs: action.payload,
             }
-        };
-        case DATA_ERROR: {
+        ;
+        case DATA_ERROR: 
             return {
                 ...state,
                 isLoading: false,
                 error: action.payload,
             }
-        }
-        case ADD_DATA: {
+        
+        case ADD_DATA: 
             return {
                 ...state,
                 isLoading: false,
                 smurfs: action.payload,
             }
-        }
+        
     default:
       return state;
   }
